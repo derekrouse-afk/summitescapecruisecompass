@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Summit Escape Cruise 🧭 Compass</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+<div class="hero">
+
+    <div class="logo-container">
+        <a href="https://www.summitescapetravel.com">
+            <img src="assets/images/logo.png" alt="Company logo">
+        </a>
+    </div>
+
+    <div class="overlay">
+
+        <div class="card" id="quizCard">
+
+            <h1>Summit Escape Cruise 🧭 Compass 🌊</h1>
+            <p id="introText">
+                Discover the cruise line that best matches your travel style and travel vibe.
+            </p>
+
+            <button id="startButton">
+                Begin Your Journey 🚢
+            </button>
+
+            <div id="quizContainer" class="hidden">
+
+                <div class="progress">
+
+                    <div id="progressBar"></div>
+
+                </div>
+
+                <h2 id="questionTitle"></h2>
+
+                <div id="answers"></div>
+
+                <div class="navigation">
+
+                    <button id="backButton">
+                        Back
+                    </button>
+
+                    <button id="nextButton">
+                        Next
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div id="resultContainer" class="hidden"></div>
+
+        </div>
+
+        <div id="contactContainer" class="hidden">
+            <div class="contact-card">
+                <p>Ready to connect? Share your quiz result and travel goals, and I’ll help you find the perfect cruise.</p>
+                <div class="summary" id="resultSummary">
+                    <h2>Your cruise result</h2>
+                    <p id="summaryText">Loading your cruise match…</p>
+                </div>
+                <form id="contactForm" action="mailto:derek.rouse@summitescapetravel.com" method="POST" enctype="text/plain">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your full name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Optional phone number">
+
+                    <label for="cruiseLine">Selected Cruise Line</label>
+                    <input type="text" id="cruiseLine" name="cruiseLine" readonly>
+
+                    <label for="matchScore">Match Score</label>
+                    <input type="text" id="matchScore" name="matchScore" readonly>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us about your travel preferences or ask questions..."></textarea>
+
+                    <button type="submit">Send Your Result</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="Data/cruiselines.js"></script>
+<script src="Data/questions.js"></script>
+<script src="js/cruiseQuiz.js"></script>
+
+</body>
+
+</html>
