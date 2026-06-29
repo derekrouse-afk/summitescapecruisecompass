@@ -28,6 +28,8 @@ const contactContainer = document.getElementById("contactContainer");
 const cruiseLineInput = document.getElementById("cruiseLine");
 const matchScoreInput = document.getElementById("matchScore");
 const summaryText = document.getElementById("summaryText");
+const contactForm = document.getElementById("contactForm");
+const contactMessage = document.getElementById("contactMessage");
 
 startButton.addEventListener("click", () => {
     startButton.style.display = "none";
@@ -36,6 +38,64 @@ startButton.addEventListener("click", () => {
     resultContainer.classList.add("hidden");
     loadQuestion();
 });
+
+contactForm.addEventListener("submit", handleContactSubmit);
+
+function handleContactSubmit(event) {
+    event.preventDefault();
+
+    const payload = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        cruiseLine: cruiseLineInput.value,
+        matchScore: matchScoreInput.value,
+        message: document.getElementById("message").value.trim(),
+    };
+
+    const endpoint = contactForm.dataset.endpoint || contactForm.action;
+    submitContactData(endpoint, payload);
+}
+
+function submitContactData(endpoint, payload) {
+    const button = contactForm.querySelector("button[type='submit']");
+    button.disabled = true;
+    button.textContent = "Sending...";
+    contactMessage.classList.add("hidden");
+
+    fetch(endpoint, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Unable to send request. Please try again later.");
+        }
+        return response.json().catch(() => null);
+    })
+    .then(() => {
+        const userName = payload.name ? payload.name.split(' ')[0] : 'Traveler';
+        showContactFeedback(`Thanks, ${userName}! Your cruise result has been sent successfully. One of our planners will reach out soon.`, true);
+        contactForm.reset();
+    })
+    .catch(error => {
+        showContactFeedback(error.message || "There was a problem sending your result.", false);
+    })
+    .finally(() => {
+        button.disabled = false;
+        button.textContent = "Send Your Result";
+    });
+}
+
+function showContactFeedback(message, success) {
+    contactMessage.textContent = message;
+    contactMessage.classList.toggle("hidden", false);
+    contactMessage.classList.toggle("success", success);
+    contactMessage.classList.toggle("error", !success);
+}
 
 function loadQuestion() {
     answers.classList.add("fade-out");
