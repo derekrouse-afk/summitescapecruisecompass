@@ -216,7 +216,7 @@ function displayResults(matches) {
 
     const instruction = document.createElement("p");
     instruction.className = "result-instruction";
-    instruction.textContent = "Choose the cruise that feels most like your dream vacation to send me a message and get more information tailored just for you.";
+    instruction.textContent = "Choose the cruise that feels most like your dream vacation. Click your preferred result to get a customized cruise quote for that cruise line.";
     resultContainer.appendChild(instruction);
 
     topThree.forEach(result => {
